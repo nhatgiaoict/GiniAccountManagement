@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+#if MACCATALYST
+using Foundation;
+#endif
 
 namespace GiniAccountManagement
 {
@@ -92,10 +95,9 @@ namespace GiniAccountManagement
 
         private static string GetConfigPath()
         {
-            string baseDir = AppContext.BaseDirectory;
 #if DEBUG
-            // Nếu đang chạy trong bin/Debug/... → đi lên 2-3 cấp để tìm project root
-            var dir = new DirectoryInfo(baseDir);
+            // Nếu đang chạy trong bin/Debug/... → đi lên để tìm project root chứa config.json
+            var dir = new DirectoryInfo(AppContext.BaseDirectory);
             while (dir != null && !File.Exists(Path.Combine(dir.FullName, "config.json")))
             {
                 dir = dir.Parent;
@@ -104,8 +106,28 @@ namespace GiniAccountManagement
             if (dir != null)
                 return Path.Combine(dir.FullName, "config.json");
 #endif
-            // Mặc định: dùng baseDir
-            return Path.Combine(baseDir, "config.json");
+
+            string fileName = "config.json";
+
+#if WINDOWS
+    string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+    string appDir = Path.Combine(appData, "GiniAccountManagement");
+    Directory.CreateDirectory(appDir);
+    return Path.Combine(appDir, fileName);
+
+#elif MACCATALYST
+    var urls = NSFileManager.DefaultManager.GetUrls(NSSearchPathDirectory.ApplicationSupportDirectory, NSSearchPathDomain.User);
+    string appDir = Path.Combine(urls[0].Path, "GiniAccountManagement");
+    Directory.CreateDirectory(appDir);
+    return Path.Combine(appDir, fileName);
+
+#else
+            // Linux hoặc macOS (không MacCatalyst)
+            string home = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            string appDir = Path.Combine(home, ".giniaccountmanagement");
+            Directory.CreateDirectory(appDir);
+            return Path.Combine(appDir, fileName);
+#endif
         }
     }
 }

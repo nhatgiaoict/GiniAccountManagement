@@ -18,7 +18,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GiniAccountManagement")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+52fd213ecf797985217bf3913bdcace95293240f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+70980b5580af117b5a27cc4e71d6b37d09e60b9d")]
 [assembly: System.Reflection.AssemblyProductAttribute("GiniAccountManagement")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GiniAccountManagement")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

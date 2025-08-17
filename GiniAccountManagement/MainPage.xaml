@@ -1,0 +1,90 @@
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dg="clr-namespace:Maui.DataGrid;assembly=Maui.DataGrid"
+    x:Class="GiniAccountManagement.MainPage"
+    xmlns:models="clr-namespace:GiniAccountManagement.Models"
+    x:Name="Root"
+    Title="Quản lý tài khoản">
+
+    <VerticalStackLayout Padding="10" Spacing="10">
+        <HorizontalStackLayout Spacing="8" Padding="10,0">
+            <Button Text="Nhập tài khoản" Clicked="OnImportClicked" WidthRequest="160"
+                HorizontalOptions="Start" />
+
+            <Button Text="Reload" Clicked="OnReloadClicked" WidthRequest="160"
+                HorizontalOptions="Start" />
+        </HorizontalStackLayout>
+
+       
+        <!-- Viền ngoài -->
+        <Frame BorderColor="Black" CornerRadius="6" HasShadow="False" Padding="0">
+            <ScrollView Orientation="Both">
+            <dg:DataGrid
+                ItemsSource="{Binding Rows}"
+                RowHeight="50"
+                HeaderHeight="36"
+                HeaderBordersVisible="True"
+                VerticalOptions="FillAndExpand">
+                <dg:DataGrid.Columns>
+                        <dg:DataGridColumn Title="Tùy chọn" Width="80">
+                            <dg:DataGridColumn.CellTemplate>
+                                <DataTemplate x:DataType="models:Account">
+                                    <Grid Padding="0" HorizontalOptions="Center" VerticalOptions="Center">
+                                        <Button Text="⋮"
+                  Padding="6,0"
+                  FontSize="18"
+                  Command="{Binding Source={x:Reference Root},
+                                    Path=BindingContext.ShowRowMenuCommand}"
+                  CommandParameter="{Binding}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </dg:DataGridColumn.CellTemplate>
+                        </dg:DataGridColumn>
+                        <dg:DataGridColumn Title="Chọn" PropertyName="Chon" Width="52">
+                        <dg:DataGridColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding Chon}"
+                                          HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </DataTemplate>
+                        </dg:DataGridColumn.CellTemplate>
+                    </dg:DataGridColumn>
+
+                    <dg:DataGridColumn Title="STT" PropertyName="STT" Width="60"/>
+
+                    <dg:DataGridColumn Title="UID" PropertyName="UID" Width="140" />
+
+                    <dg:DataGridColumn Title="Token" PropertyName="Token" Width="120"/>
+
+                    <dg:DataGridColumn Title="Email" PropertyName="Email" Width="160"/>
+
+                    <dg:DataGridColumn Title="Tên"        PropertyName="Ten"        Width="120"/>
+                    <dg:DataGridColumn Title="Bạn bè"     PropertyName="BanBe"      Width="90"/>
+                    <dg:DataGridColumn Title="Nhóm"       PropertyName="Nhom"       Width="90"/>
+                    <dg:DataGridColumn Title="Ngày sinh"  PropertyName="NgaySinh"   Width="120"/>
+                    <dg:DataGridColumn Title="Giới tính"  PropertyName="GioiTinh"   Width="90"/>
+
+                    <dg:DataGridColumn Title="Mật khẩu" PropertyName="MatKhau" Width="140"/>
+
+                    <dg:DataGridColumn Title="Email khôi phục" PropertyName="EmailKhoiPhuc" Width="180"/>
+
+                    <dg:DataGridColumn Title="Mã 2FA" PropertyName="Ma2FA" Width="120"/>
+
+                    <dg:DataGridColumn Title="Proxy"   PropertyName="Proxy"   Width="120"/>
+                    <dg:DataGridColumn Title="Profile" PropertyName="Profile" Width="140"/>
+                    <dg:DataGridColumn Title="Thư mục" PropertyName="ThuMuc"  Width="160"/>
+                    <dg:DataGridColumn Title="Lần tương tác cuối" PropertyName="LanTuongTacCuoi" Width="180"/>
+                </dg:DataGrid.Columns>
+
+                <!-- màu so le hàng -->
+                <dg:DataGrid.RowsBackgroundColorPalette>
+                    <dg:PaletteCollection>
+                        <Color>#F7F7F7</Color>
+                        <Color>#FFFFFF</Color>
+                    </dg:PaletteCollection>
+                </dg:DataGrid.RowsBackgroundColorPalette>
+            </dg:DataGrid>
+            </ScrollView>
+        </Frame>
+    </VerticalStackLayout>
+</ContentPage>

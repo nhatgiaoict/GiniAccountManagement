@@ -1,0 +1,22 @@
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="GiniAccountManagement.Views.ImportPage"
+    Title="Nhập dữ liệu">
+
+    <VerticalStackLayout Padding="14" Spacing="12">
+
+        <Label Text="Dán/nhập dữ liệu" />
+
+        <Editor x:Name="EditorBox"
+                Placeholder="UID|Fb Password|2FA|Email|Email Password|Email Recovery|Password Email Recovery|Cookie|Token|Note"
+                HeightRequest="280"
+                AutoSize="TextChanges"/>
+
+        <HorizontalStackLayout Spacing="10">
+            <Button Text="Hủy"  Clicked="OnCancel"/>
+            <Button Text="Thêm" Clicked="OnConfirm"/>
+        </HorizontalStackLayout>
+
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,0 +1,13 @@
+// Windows
+{
+  "ProfileFilePath": "E:/Data/GiniAccountManagement/profiles.json",
+  "ProfilesRootDir": "E:/Data/GiniAccountManagement/ChromeProfiles",
+  "RequireVpn": true
+}
+
+// MacOS/Linux
+//{
+//  "ProfileFilePath": "profiles.json",
+//  "ProfilesRootDir": "ChromeProfiles",
+//  "RequireVpn": true
+//}
